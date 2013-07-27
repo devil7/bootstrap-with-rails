@@ -1,0 +1,11 @@
+window.BootstrapBlog =
+  Models: {}
+  Collections: {}
+  Views: {}
+  Routers: {}
+  initialize: ->
+    new BootstrapBlog.Routers.Entries()
+	  Backbone.history.start()
+
+$(document).ready ->
+  BootstrapBlog.initialize()

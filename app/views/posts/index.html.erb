@@ -1,0 +1,39 @@
+<h1>Listing posts</h1>
+<%= link_to 'New Post', new_post_path %>
+<br />
+<%= content_tag :div, :class => "", :id => "" do%>
+<%end%>
+<%= content_tag :div, :class => "accordion", :id => "accordion2", :style => "width: 23%;" do%>
+	<% @posts.each do |post| %>
+	  <%= content_tag :div, :class => "accordion-group", :id => "" do%>
+	    <%= content_tag :div, :class => "accordion-heading", :id => "" do%>
+	      <%= content_tag :a, :class => "accordion-toggle", :id => "", "data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapse#{post.id}" do%>
+	        <%= post.title%>
+	      <%end%>
+	    <%end%>
+	    <%= content_tag :div, :class => (post == @posts[0] ? "accordion-body collapse in" : "accordion-body collapse"), :id => "collapse#{post.id}" do%>
+	      <%= content_tag :div, :class => "accordion-inner", :id => "" do%>
+	        <%= post.content%>
+			<%= image_tag post.avatar.url(:thumb) %></td>
+			<br/>
+			<%= link_to 'Edit', edit_post_path(post) %>
+    		<%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+	      <%end%>
+	    <%end%>
+	  <%end%>
+	<%end%>
+<%end%>
+
+
+<br/>
+<%= content_tag :div, :id => "myCarousel", :class => "carousel slide", :style => "width: 86%;" do%>
+	<%= content_tag :div, :class => "carousel-inner" do%>
+		<% @posts.each do |post|%>
+			<%= content_tag :div, :class => (post == @posts[0] ? "active item" : "item") do %>
+				<img src= <%= post.avatar.url %> alt="">
+			<%end%>
+		<%end%>
+	<%end%>
+<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+<%end%>
